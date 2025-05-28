@@ -1,0 +1,1 @@
+export const self = <T>(x : T) : T => x;
