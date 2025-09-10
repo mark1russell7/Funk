@@ -1,7 +1,3 @@
-Below is a **comprehensive, implementation‑ready specification** for the TypeScript library you shared. It documents the intent, public API, semantics, invariants, complexity, and usage patterns of each module, and it flags sharp edges along with suggested extensions that fit the current design.
-
----
-
 # Library Specification
 
 > **Status:** Draft v1.0 (covers all files present as of 2025‑08‑30)
