@@ -751,7 +751,7 @@ class MyEntangler extends Entangler<NodeId, Binding> {
 
 ---
 
-## 16. Minimal quick‑start (README‑style)
+## 16. Minimal quick‑start
 
 ```ts
 import { collect } from "./collections/collect";
@@ -771,7 +771,3 @@ m.get("missing"); // none<number>()
 const o = {};
 const b = canonicalize(o); // stable box for 'o'
 ```
-
----
-
-If you’d like, I can turn this into a polished `README.md` and `docs/` API reference (with JSDoc‑driven signatures) or add the thunked `cacheBy`, array‑preserving `Collection` variants, and tests aligned to this spec.
