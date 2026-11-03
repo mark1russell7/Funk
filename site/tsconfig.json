@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@mark1russell7/cue/ts/config/vite.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "composite": false,
+    "incremental": false,
+    "isolatedDeclarations": false,
+    "declaration": false,
+    "declarationMap": false,
+    // The site imports the library source, and this source does not obey these five rules.
+    // These flags keep the library unchanged. Each other strict rule stays on.
+    "verbatimModuleSyntax": false,
+    "erasableSyntaxOnly": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitOverride": false,
+    "types": [
+      "vite/client",
+      "node"
+    ]
+  }
+}

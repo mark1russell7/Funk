@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "funk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A solid funky layer of Javascript functional sugar.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark1russell7/Funk.git"
+  },
+  "type": "module",
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "exports": {
+    "./*": "./*.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "typecheck": "pnpm --filter @funk/site run typecheck",
+    "test": "pnpm --filter @funk/site run test",
+    "lint:ste": "ste-lint"
+  },
+  "devDependencies": {
+    "@mark1russell7/ste-lint": "^0.1.2"
+  }
+}
