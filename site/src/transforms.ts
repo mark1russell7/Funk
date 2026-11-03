@@ -31,7 +31,7 @@ export const TILES: readonly Tile[] = [
 /** The first row of the page. It has each kind of duplicate. */
 export const START: readonly string[] = ["3", "1", "3", "2", "nan", "nan", "ada", "ada", "twin"];
 
-/** This function gives the tile of a value. A value with no tile, such as a type name, gets a tile of its own. */
+/** This function gives the tile of a value. A value with no tile, for example a type name, gets a tile of its own. */
 export function tileOf(value: unknown): Tile {
   return TILES.find((tile) => Object.is(tile.value, value)) ?? { id: String(value), label: JSON.stringify(value), value, kind: "string" };
 }

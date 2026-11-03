@@ -1,5 +1,5 @@
 /**
- * The sponge of the page. A real `sponge` gets each feed. The state of a `sponge` is private, so each pore on the page
+ * The sponge of the page. A real `sponge` gets each feed. The state of a `sponge` is private. So each pore on the page
  * is a real `sponge` with one key, and it gets the same water. Thus the picture also comes from Funk.
  */
 import { sponge } from "funk/functional/sponge";
