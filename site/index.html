@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Funk: functional parts for TypeScript, live</title>
+    <meta name="description" content="Flip a step of an Either chain and see the short-circuit. Compare arrays and sets. Feed a sponge. Each result comes from the real Funk source, which runs in your browser." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23241235'/%3E%3Cpath d='M4 11h10c5 0 5 10 10 10h4' stroke='%23ff79bb' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M4 11h24' stroke='%233fd9c4' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='14' cy='11' r='4' fill='%23ffc53d'/%3E%3C/svg%3E" />
+    <script>
+      // The saved theme applies before the first paint, so a dark page does not flash white.
+      try {
+        const t = localStorage.getItem("funk-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#railway">Skip to the railway</a>
+    <header class="top">
+      <h1 class="wordmark">Funk</h1>
+      <div class="intro">
+        <p class="lead">Small functional parts for TypeScript. Each result on this page comes from the real Funk source, which runs in your browser.</p>
+        <nav class="links" aria-label="Site">
+          <a href="#railway">Railway</a>
+          <a href="#tiles">Arrays and sets</a>
+          <a href="#sponge">Sponge</a>
+          <a href="#parts-title">Small parts</a>
+          <a href="releases/">Releases</a>
+          <a href="status/">Status</a>
+          <a href="https://github.com/mark1russell7/Funk">GitHub</a>
+          <button type="button" class="theme" id="theme" aria-label="Color theme">Theme: auto</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="railway" class="stage" aria-labelledby="rail-title">
+        <div class="stage-in">
+          <div class="rail-head">
+            <div>
+              <h2 id="rail-title">Fail a step and the value leaves the track</h2>
+              <p class="note">
+                <code>chain</code> calls a step only on the Right track. After a failure, the later steps do not run: the Left value goes past them.
+              </p>
+            </div>
+            <div class="seg" id="rail-tabs" role="tablist" aria-label="Pipeline"></div>
+          </div>
+
+          <div class="rail-controls">
+            <label for="rail-input" class="field">
+              <span id="rail-input-label"></span>
+              <input id="rail-input" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" />
+            </label>
+            <div class="chips" id="rail-presets" role="group" aria-label="Examples"></div>
+          </div>
+
+          <div class="rail-map">
+            <p class="track-names" aria-hidden="true"><span class="n-right">Right: the value goes on</span><span class="n-left">Left: the reason goes on</span></p>
+            <svg id="rail-svg" role="img" aria-label="Two tracks. A value runs on the Right track, and a failure moves it to the Left track." viewBox="0 0 1000 190"></svg>
+          </div>
+          <ol class="stops" id="stops"></ol>
+
+          <div class="final-row">
+            <p class="final-label" id="rail-track-name"></p>
+            <output class="final" id="rail-final" aria-live="polite"></output>
+            <p class="note" id="rail-calls"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tiles" class="band" aria-labelledby="tiles-title">
+        <div class="band-head">
+          <h2 id="tiles-title">One row of values, two answers</h2>
+          <p class="note">The same tiles go into <code>collect</code> as an array and as a Set. Select a call and compare the two sides.</p>
+        </div>
+
+        <div class="tile-tools">
+          <div class="tool">
+            <span class="tool-name">Your row. Select a tile to remove it.</span>
+            <div class="tiles" id="tile-source" role="group" aria-label="The tiles of the row"></div>
+            <p class="hint" id="tile-empty" hidden>The row is empty. Add a tile below.</p>
+          </div>
+          <div class="tool">
+            <span class="tool-name">Add a tile. The two ada tiles are equal, but they are two objects.</span>
+            <div class="tiles" id="tile-palette" role="group" aria-label="Tiles to add"></div>
+            <div class="buttons">
+              <button type="button" id="tile-reset">Start row</button>
+              <button type="button" id="tile-clear">Empty row</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool">
+          <span class="tool-name">The call</span>
+          <div class="chips" id="tile-ops" role="group" aria-label="The call on both sides"></div>
+        </div>
+
+        <p class="lesson" id="tile-lesson" aria-live="polite"></p>
+
+        <div class="lanes">
+          <section class="lane" id="lane-array" aria-labelledby="array-title">
+            <h3 id="array-title"><code>collect([...])</code></h3>
+            <div class="tiles" id="array-before"></div>
+            <p class="lane-call"><code id="array-call"></code></p>
+            <div class="tiles" id="array-after"></div>
+            <p class="lane-line" id="array-line"></p>
+          </section>
+          <section class="lane" id="lane-set" aria-labelledby="set-title">
+            <h3 id="set-title"><code>collect(new Set([...]))</code></h3>
+            <div class="tiles" id="set-before"></div>
+            <p class="lane-call"><code id="set-call"></code></p>
+            <div class="tiles" id="set-after"></div>
+            <p class="lane-line" id="set-line"></p>
+          </section>
+        </div>
+      </section>
+
+      <section id="sponge" class="band sponge-band" aria-labelledby="sponge-title">
+        <div class="band-head">
+          <h2 id="sponge-title">Feed the sponge until it is full</h2>
+          <p class="note"><code>sponge</code> keeps each piece that you give it. When each pore has a value, it calls your function with all the pieces.</p>
+        </div>
+
+        <div class="sponge-grid">
+          <div class="sponge-art">
+            <svg id="sponge-blob" viewBox="0 0 320 210" role="img" aria-label="A sponge with three pores: host, port and db">
+              <path class="blob" d="M38 22C96 4 214 10 280 20c30 5 34 40 32 84-2 46 2 76-34 84-62 12-178 16-240 2C6 182 8 150 8 104 8 62 6 32 38 22z" />
+              <circle class="pit" cx="34" cy="38" r="6" />
+              <circle class="pit" cx="284" cy="170" r="7" />
+              <circle class="pit" cx="160" cy="30" r="5" />
+              <circle class="pit" cx="100" cy="176" r="6" />
+              <circle class="pit" cx="228" cy="34" r="4" />
+              <g class="pore" id="pore-host" data-filled="false"><circle class="hole" cx="74" cy="100" r="46" /><circle class="water" cx="74" cy="100" r="46" /><text x="74" y="106">host</text></g>
+              <g class="pore" id="pore-port" data-filled="false"><circle class="hole" cx="166" cy="100" r="40" /><circle class="water" cx="166" cy="100" r="40" /><text x="166" y="106">port</text></g>
+              <g class="pore" id="pore-db" data-filled="false"><circle class="hole" cx="252" cy="104" r="44" /><circle class="water" cx="252" cy="104" r="44" /><text x="252" y="110">db</text></g>
+            </svg>
+            <dl class="pore-values">
+              <div><dt>host</dt><dd id="pore-host-value"></dd></div>
+              <div><dt>port</dt><dd id="pore-port-value"></dd></div>
+              <div><dt>db</dt><dd id="pore-db-value"></dd></div>
+            </dl>
+          </div>
+
+          <div class="sponge-side">
+            <div class="tool">
+              <span class="tool-name">Feed it</span>
+              <div class="chips" id="drops" role="group" aria-label="Water for the sponge"></div>
+            </div>
+            <form class="water-form" id="water-form">
+              <label for="water" class="tool-name">Or write your own water as JSON</label>
+              <div class="water-row">
+                <input id="water" class="mono" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" value='{"host": "db.example.com"}' />
+                <button type="submit" class="primary" id="water-go">Absorb</button>
+              </div>
+              <p class="problem" id="water-problem" role="status" aria-live="polite"></p>
+            </form>
+            <div class="squeezed">
+              <span class="tool-name">Squeezed <strong id="squeeze-count">0</strong> times</span>
+              <output class="sponge-out" id="sponge-result" data-squeezed="false"></output>
+            </div>
+            <ol class="feed-log" id="feed-log" aria-label="The calls of absorb, newest first"></ol>
+            <button type="button" id="sponge-new">New sponge</button>
+          </div>
+        </div>
+        <p class="hint">The state of a sponge is private. So each pore in the picture is a real sponge with one key, and it gets the same water.</p>
+      </section>
+
+      <section class="band" aria-labelledby="parts-title">
+        <div class="band-head">
+          <h2 id="parts-title">The small parts</h2>
+          <p class="note">The page runs each example when it starts. Select a name to read its source.</p>
+        </div>
+        <table class="parts">
+          <thead>
+            <tr><th scope="col">Part</th><th scope="col">What it does</th><th scope="col">Live result</th></tr>
+          </thead>
+          <tbody id="parts"></tbody>
+        </table>
+        <p class="note">
+          Funk is not on npm. Its files are plain TypeScript with no dependencies. The
+          <a href="https://github.com/mark1russell7/Funk#readme">specification</a> tells the behavior of each part.
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p><a href="https://github.com/mark1russell7/Funk">github.com/mark1russell7/Funk</a></p>
+      <p id="build"></p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

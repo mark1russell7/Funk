@@ -1,1 +1,7 @@
 src-catalog.md
+
+# The packages and the build of the site.
+node_modules/
+coverage/
+site/dist/
+*.log

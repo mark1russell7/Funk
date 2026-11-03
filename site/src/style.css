@@ -1,0 +1,969 @@
+/* The style of the Funk site. A 1970s record sleeve: a soft fat serif, aubergine, marigold, teal and pink.
+   Teal is the Right track, pink is the Left track, and marigold is the value that runs. */
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#efe9fb, #170c24);
+  --surface: light-dark(#fbf9ff, #221433);
+  --sunken: light-dark(#e3dbf6, #2e1d44);
+  --ink: light-dark(#241235, #f5eefc);
+  --muted: light-dark(#5b4b70, #b9a9cc);
+  --rule: light-dark(#cdc1e6, #432f5e);
+  --link: light-dark(#5a2bb0, #c9aeff);
+  --teal: light-dark(#0b7668, #3fd9c4);
+  --pink: light-dark(#b3146c, #ff79bb);
+  --gold: #ffc53d;
+  --gold-ink: #2b1a00;
+  /* The railway has the same dark ground in both themes. */
+  --stage: light-dark(#241235, #2a1740);
+  --stage-up: light-dark(#34204b, #3a2455);
+  --stage-ink: #f8f1ff;
+  --stage-muted: #c9b9dc;
+  --stage-rule: #54406f;
+  --rail-right: #3fd9c4;
+  --rail-left: #ff79bb;
+  --serif: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  --page: 75rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 2px;
+}
+
+code,
+.mono {
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+button:hover {
+  border-color: var(--ink);
+}
+
+button.primary {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--gold-ink);
+  font-weight: 650;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+h2 {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 72;
+  font-weight: 700;
+  line-height: 1.04;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+.skip {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 2;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--gold-ink);
+}
+
+.skip:focus {
+  top: 0.5rem;
+}
+
+/* The top of the page: the fat wordmark with its offset shadow, and the short text beside it. */
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: end;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 1.25rem var(--gutter) 1.5rem;
+}
+
+@media (min-width: 760px) {
+  .top {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.wordmark {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(5rem, 21vw, 10.5rem);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.86;
+  text-shadow: 0.045em 0.045em 0 var(--gold);
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  max-width: 44rem;
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  line-height: 1.4;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.9rem;
+  align-items: center;
+}
+
+.links a {
+  padding: 0.35rem 0;
+}
+
+.note {
+  max-width: 62ch;
+  color: var(--muted);
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  font-size: 0.92rem;
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--gold-ink);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* The railway. */
+.stage {
+  background: var(--stage);
+  color: var(--stage-ink);
+  scroll-margin-top: 0.5rem;
+}
+
+.stage-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.75rem) var(--gutter);
+}
+
+.stage .note {
+  margin-top: 0.5rem;
+  color: var(--stage-muted);
+}
+
+.stage a {
+  color: var(--gold);
+}
+
+.stage code {
+  color: var(--gold);
+}
+
+.stage button {
+  border-color: var(--stage-rule);
+  background: var(--stage-up);
+  color: var(--stage-ink);
+}
+
+.stage button:hover {
+  border-color: var(--gold);
+}
+
+.rail-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  align-items: end;
+}
+
+@media (min-width: 960px) {
+  .rail-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.seg button[aria-selected="true"] {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--gold-ink);
+  font-weight: 650;
+}
+
+.rail-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: end;
+}
+
+@media (min-width: 760px) {
+  .rail-controls {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+}
+
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.25rem;
+  font-weight: 600;
+}
+
+.stage input {
+  border-color: var(--stage-rule);
+  background: var(--stage-up);
+  color: var(--stage-ink);
+  font-family: var(--mono);
+}
+
+.rail-map {
+  min-width: 0;
+}
+
+.track-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.n-right {
+  color: var(--rail-right);
+}
+
+.n-left {
+  color: var(--rail-left);
+}
+
+#rail-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.track,
+.branch,
+.trail {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.track {
+  stroke-width: 8;
+  opacity: 0.32;
+}
+
+.track-right {
+  stroke: var(--rail-right);
+}
+
+.track-left {
+  stroke: var(--rail-left);
+}
+
+.branch {
+  stroke: var(--rail-left);
+  stroke-dasharray: 3 11;
+  stroke-width: 4;
+  opacity: 0.6;
+}
+
+.trail {
+  stroke: var(--rail-right);
+  stroke-width: 11;
+}
+
+.trail.on-left {
+  stroke: var(--rail-left);
+}
+
+.dot {
+  fill: var(--stage);
+  stroke: var(--rail-right);
+  stroke-width: 5;
+}
+
+.dot.is-ran {
+  fill: var(--rail-right);
+}
+
+.dot.is-failed {
+  fill: var(--rail-left);
+  stroke: var(--rail-left);
+}
+
+.dot.is-skipped {
+  stroke: var(--stage-rule);
+}
+
+.joint {
+  fill: var(--stage-up);
+  stroke: var(--stage-ink);
+  stroke-width: 4;
+}
+
+.dot-num {
+  fill: var(--stage-ink);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.dot.is-ran + .dot-num,
+.dot.is-failed + .dot-num {
+  fill: var(--stage);
+}
+
+.car {
+  fill: var(--gold);
+  stroke: var(--stage);
+  stroke-width: 3;
+}
+
+.stops {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 960px) {
+  .stops {
+    grid-template-columns: repeat(var(--stops), minmax(0, 1fr));
+  }
+}
+
+.stop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.25rem;
+  align-content: start;
+  min-width: 0;
+  padding: 0.6rem;
+  border-radius: 10px;
+  background: var(--stage-up);
+  border-top: 4px solid var(--rail-right);
+  font-size: 0.92rem;
+}
+
+.stop.is-failed {
+  border-top-color: var(--rail-left);
+}
+
+.stop.is-skipped {
+  border-top-color: var(--stage-rule);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--stage-rule);
+}
+
+.stop-head {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.stop-num {
+  flex: none;
+  font-weight: 700;
+}
+
+.stop-call {
+  min-width: 0;
+  color: var(--gold);
+  overflow-wrap: anywhere;
+}
+
+.stop-verdict {
+  font-weight: 650;
+}
+
+.stop.is-skipped .stop-verdict {
+  color: var(--stage-muted);
+}
+
+.stop.is-failed .stop-verdict {
+  color: var(--rail-left);
+}
+
+.stop-out {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
+}
+
+.stop-note {
+  color: var(--stage-muted);
+  font-size: 0.85rem;
+}
+
+.flip {
+  justify-self: start;
+  max-width: 100%;
+  font-size: 0.88rem;
+}
+
+.stage .flip[aria-pressed="true"] {
+  border-color: var(--rail-left);
+  background: var(--rail-left);
+  color: #3a0720;
+  font-weight: 650;
+}
+
+.final-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.15rem;
+}
+
+.final-label {
+  color: var(--stage-muted);
+}
+
+.final {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 6vw, 3rem);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 72;
+  font-weight: 800;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  color: var(--rail-right);
+}
+
+.final[data-track="left"] {
+  color: var(--rail-left);
+}
+
+/* The sections after the railway. */
+.band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) var(--gutter) 0;
+  scroll-margin-top: 0.5rem;
+}
+
+.band-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
+.tile-tools {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 860px) {
+  .tile-tools {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+
+.tool {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.4rem;
+  align-content: start;
+}
+
+.tool-name {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  min-height: 2.75rem;
+}
+
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.5rem;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+button.tile {
+  border-radius: 8px;
+}
+
+.k-string {
+  border-color: var(--teal);
+}
+
+.k-nan {
+  border-color: var(--pink);
+  border-style: dashed;
+}
+
+/* The two ada objects look alike and have two colors, so the eye sees two identities. */
+.k-object-a {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--gold-ink);
+}
+
+.k-object-b {
+  border-color: var(--gold);
+  border-style: double;
+  border-width: 4px;
+  background: transparent;
+}
+
+.tile.gone {
+  opacity: 0.45;
+  text-decoration: line-through;
+  border-style: dotted;
+}
+
+.lesson {
+  max-width: 62ch;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-variation-settings: "SOFT" 100, "opsz" 24;
+  line-height: 1.3;
+}
+
+.lanes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 760px) {
+  .lanes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.4rem;
+  align-content: start;
+  min-width: 0;
+  padding: 0.85rem;
+  border-left: 5px solid var(--teal);
+  background: var(--surface);
+}
+
+#lane-set {
+  border-left-color: var(--pink);
+}
+
+.lane-call {
+  color: var(--muted);
+}
+
+.lane-line {
+  font-weight: 600;
+}
+
+.thrown {
+  color: var(--pink);
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.value-out {
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* The sponge. */
+.sponge-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 860px) {
+  .sponge-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 2.5rem;
+  }
+}
+
+.sponge-art {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  align-content: start;
+}
+
+#sponge-blob {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 100%;
+}
+
+#sponge-blob.squeeze {
+  animation: squeeze 520ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes squeeze {
+  35% {
+    transform: scale(1.06, 0.72);
+  }
+}
+
+.blob {
+  fill: var(--gold);
+}
+
+.pit {
+  fill: #e0a21d;
+}
+
+.hole {
+  fill: #c98a0b;
+}
+
+.water {
+  fill: #2f8fc4;
+  transform: scale(0);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform 320ms ease-out;
+}
+
+.pore[data-filled="true"] .water {
+  transform: scale(1);
+}
+
+.pore text {
+  fill: var(--gold-ink);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.pore[data-filled="true"] text {
+  fill: #fff;
+}
+
+.pore-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin: 0;
+  max-width: 34rem;
+}
+
+.pore-values dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.pore-values dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
+}
+
+.sponge-side {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.85rem;
+  align-content: start;
+}
+
+.water-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.3rem;
+}
+
+.water-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.4rem;
+}
+
+.problem {
+  color: var(--pink);
+  font-size: 0.9rem;
+}
+
+.problem:empty {
+  display: none;
+}
+
+.squeezed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.1rem;
+}
+
+.sponge-out {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 4vw, 1.9rem);
+  font-variation-settings: "SOFT" 100, "opsz" 36;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.sponge-out[data-squeezed="false"] {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.feed-log {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.88rem;
+}
+
+.feed-log:empty {
+  display: none;
+}
+
+.feed-log li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0.25rem 0;
+  border-top: 1px solid var(--rule);
+  overflow-wrap: anywhere;
+}
+
+.gave {
+  color: var(--muted);
+}
+
+.feed-log li[data-gave="result"] .gave {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+#sponge-new {
+  justify-self: start;
+}
+
+/* The table of small parts. On a phone, each part becomes a block of three lines. */
+.parts {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .parts thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .parts,
+  .parts tbody,
+  .parts tr,
+  .parts th,
+  .parts td {
+    display: block;
+    width: 100%;
+  }
+
+  .parts tr {
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .parts th,
+  .parts td {
+    padding: 0.1rem 0;
+    border-top: 0;
+  }
+}
+
+.parts th,
+.parts td {
+  padding: 0.55rem 0.75rem 0.55rem 0;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.parts thead th {
+  border-top: 0;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.ex {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-bottom: 0.3rem;
+}
+
+.ex code {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.ex output {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: var(--page);
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  padding: 1rem var(--gutter) 2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  #sponge-blob.squeeze {
+    animation: none;
+  }
+
+  .water {
+    transition: none;
+  }
+}

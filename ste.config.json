@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/@mark1russell7/ste-lint/ste.config.schema.json",
+  "include": ["docs/*.md", "site/src/**/*.ts"],
+  "ignore": ["**/node_modules/**", "**/dist/**", "**/*.d.ts", "**/*.test.ts"],
+  "technicalNouns": ["railway", "sponge", "pore", "tile", "probe", "roadmap"],
+  "technicalVerbs": [],
+  "properNouns": ["ASD", "ASD-STE100", "GitHub", "Funk", "Either", "Optional", "Box", "Entangler", "Left", "Right", "Set", "TypeScript", "npm"]
+}
