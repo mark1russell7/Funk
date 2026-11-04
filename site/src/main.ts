@@ -1,5 +1,5 @@
 // The start of the page: the theme, the three live views, the table of small parts and the build line.
-import { byId, h, setupTheme } from "@mark1russell7/site-pages/chrome";
+import { byId, h, setupTheme, showBuild } from "@mark1russell7/site-pages/chrome";
 import "@fontsource-variable/fraunces/full.css";
 import { ROWS } from "./live.ts";
 import { RailView } from "./rail-view.ts";
@@ -30,4 +30,4 @@ byId("parts").replaceChildren(
   ),
 );
 
-byId("build").append("Build ", __BUILD__.sha === "local" ? "local" : h("a", { href: `https://github.com/mark1russell7/Funk/commit/${__BUILD__.sha}` }, __BUILD__.sha), ` of ${__BUILD__.date}`);
+showBuild(byId("build"), __BUILD__, "mark1russell7/Funk");
