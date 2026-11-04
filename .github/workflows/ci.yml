@@ -1,7 +1,7 @@
 # The CI of this repository. The job ci is the shared CI of mark1russell7 (reusable-ci.yml of mark1russell7/template,
 # its CI.md). It runs each standard script that package.json has: typecheck, test, the build of the site and lint:ste.
 # The scheduled Pages build also reads the runs of this workflow (the action green-main).
-# The root has no script check:conventions: the rule license-file needs a license file, and the owner chooses it.
+# The root has no script check:conventions yet.
 name: CI
 
 on:

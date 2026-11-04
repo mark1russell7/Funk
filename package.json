@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "funk",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "description": "A solid funky layer of Javascript functional sugar.",
   "repository": {
