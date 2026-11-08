@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@ed0b3ebc9cd89b78c880fb7af9f6b09392a383f7 # main
+    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@6f9092e1d10a16562c70c2bdeef469cb42a4a808 # main
     permissions:
       contents: read
 
