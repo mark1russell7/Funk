@@ -24,7 +24,7 @@
     "lint:ste": "ste-lint"
   },
   "devDependencies": {
-    "@mark1russell7/ste-lint": "^0.1.2",
+    "@mark1russell7/ste-lint": "^0.3.1",
     "@vitest/coverage-v8": "^5.0.3"
   }
 }
